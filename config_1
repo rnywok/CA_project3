@@ -174,7 +174,7 @@ useIndirect=true
 type=Cache
 children=tags
 addr_ranges=0:18446744073709551615:0:0:0:0
-assoc=2
+assoc=1
 clk_domain=system.cpu_clk_domain
 clusivity=mostly_incl
 data_latency=2
@@ -204,7 +204,7 @@ mem_side=system.membus.slave[2]
 
 [system.cpu.dcache.tags]
 type=LRU
-assoc=2
+assoc=1
 block_size=64
 clk_domain=system.cpu_clk_domain
 data_latency=2
@@ -794,15 +794,15 @@ eventq_index=0
 
 [system.cpu.workload]
 type=Process
-cmd=/home/rnywok/mibench/automotive/bitcount/gem_bitcnts 7500
-cwd=/home/rnywok/project3_1
+cmd=/home/rnywok/mibench/office/stringsearch/gem_search_small
+cwd=/home/rnywok/MyProject
 drivers=
 egid=100
 env=
 errout=cerr
 euid=100
 eventq_index=0
-executable=/home/rnywok/mibench/automotive/bitcount/gem_bitcnts
+executable=/home/rnywok/mibench/office/stringsearch/gem_search_small
 gid=100
 input=cin
 kvmInSE=false

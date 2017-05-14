@@ -2,8 +2,8 @@ gem5 Simulator System.  http://gem5.org
 gem5 is copyrighted software; use the --copyright option for details.
 
 gem5 compiled May 13 2017 18:19:47
-gem5 started May 13 2017 18:44:34
-gem5 executing on instance-2, pid 10391
+gem5 started May 14 2017 12:50:34
+gem5 executing on instance-2, pid 15400
 command line: /home/rnywok/CA_project3_gem5/build/ARM/gem5.debug -d /home/rnywok/project3_1/stringsearch --dump-config=config_2.ini -re --stats-file=stats_2.txt --stdout-file=stdout_2 --stderr-file=stderr_2 /home/rnywok/CA_project3_gem5/configs/example/se.py --dcache-repl-policy=LRU --l1d_size=1kB --l1d_assoc=2 --cpu-type=arm_detailed --caches --num-cpus=1 -c /home/rnywok/mibench/office/stringsearch/gem_search_small
 
 Global frequency set at 1000000000000 ticks per second
