@@ -1,0 +1,110 @@
+
+vec_mult_o3.o:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000000000 <vec_mult>:
+   0:	85 ff                	test   %edi,%edi
+   2:	0f 8e d8 00 00 00    	jle    e0 <vec_mult+0xe0>
+   8:	8d 57 fc             	lea    -0x4(%rdi),%edx
+   b:	8d 4f ff             	lea    -0x1(%rdi),%ecx
+   e:	c1 ea 02             	shr    $0x2,%edx
+  11:	83 c2 01             	add    $0x1,%edx
+  14:	83 f9 02             	cmp    $0x2,%ecx
+  17:	8d 04 95 00 00 00 00 	lea    0x0(,%rdx,4),%eax
+  1e:	0f 86 cc 00 00 00    	jbe    f0 <vec_mult+0xf0>
+  24:	31 c9                	xor    %ecx,%ecx
+  26:	31 f6                	xor    %esi,%esi
+  28:	66 0f 6f 89 00 00 00 	movdqa 0x0(%rcx),%xmm1
+  2f:	00 
+  30:	83 c6 01             	add    $0x1,%esi
+  33:	48 83 c1 10          	add    $0x10,%rcx
+  37:	66 0f 6f 81 00 00 00 	movdqa 0x0(%rcx),%xmm0
+  3e:	00 
+  3f:	66 0f 6f d1          	movdqa %xmm1,%xmm2
+  43:	66 0f 6f 89 00 00 00 	movdqa 0x0(%rcx),%xmm1
+  4a:	00 
+  4b:	66 0f f4 81 00 00 00 	pmuludq 0x0(%rcx),%xmm0
+  52:	00 
+  53:	66 0f 70 c0 08       	pshufd $0x8,%xmm0,%xmm0
+  58:	66 0f 73 d2 20       	psrlq  $0x20,%xmm2
+  5d:	66 0f 73 d1 20       	psrlq  $0x20,%xmm1
+  62:	66 0f f4 ca          	pmuludq %xmm2,%xmm1
+  66:	66 0f 70 c9 08       	pshufd $0x8,%xmm1,%xmm1
+  6b:	66 0f 62 c1          	punpckldq %xmm1,%xmm0
+  6f:	0f 29 81 00 00 00 00 	movaps %xmm0,0x0(%rcx)
+  76:	39 f2                	cmp    %esi,%edx
+  78:	77 ae                	ja     28 <vec_mult+0x28>
+  7a:	39 f8                	cmp    %edi,%eax
+  7c:	74 6a                	je     e8 <vec_mult+0xe8>
+  7e:	48 63 d0             	movslq %eax,%rdx
+  81:	8b 0c 95 00 00 00 00 	mov    0x0(,%rdx,4),%ecx
+  88:	0f af 0c 95 00 00 00 	imul   0x0(,%rdx,4),%ecx
+  8f:	00 
+  90:	89 0c 95 00 00 00 00 	mov    %ecx,0x0(,%rdx,4)
+  97:	8d 50 01             	lea    0x1(%rax),%edx
+  9a:	39 d7                	cmp    %edx,%edi
+  9c:	7e 42                	jle    e0 <vec_mult+0xe0>
+  9e:	48 63 d2             	movslq %edx,%rdx
+  a1:	83 c0 02             	add    $0x2,%eax
+  a4:	8b 0c 95 00 00 00 00 	mov    0x0(,%rdx,4),%ecx
+  ab:	0f af 0c 95 00 00 00 	imul   0x0(,%rdx,4),%ecx
+  b2:	00 
+  b3:	39 c7                	cmp    %eax,%edi
+  b5:	89 0c 95 00 00 00 00 	mov    %ecx,0x0(,%rdx,4)
+  bc:	7e 22                	jle    e0 <vec_mult+0xe0>
+  be:	48 98                	cltq   
+  c0:	8b 14 85 00 00 00 00 	mov    0x0(,%rax,4),%edx
+  c7:	0f af 14 85 00 00 00 	imul   0x0(,%rax,4),%edx
+  ce:	00 
+  cf:	89 14 85 00 00 00 00 	mov    %edx,0x0(,%rax,4)
+  d6:	c3                   	retq   
+  d7:	66 0f 1f 84 00 00 00 	nopw   0x0(%rax,%rax,1)
+  de:	00 00 
+  e0:	f3 c3                	repz retq 
+  e2:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
+  e8:	f3 c3                	repz retq 
+  ea:	66 0f 1f 44 00 00    	nopw   0x0(%rax,%rax,1)
+  f0:	31 c0                	xor    %eax,%eax
+  f2:	eb 8a                	jmp    7e <vec_mult+0x7e>
+
+Disassembly of section .text.startup:
+
+0000000000000000 <main>:
+   0:	31 f6                	xor    %esi,%esi
+   2:	83 c6 08             	add    $0x8,%esi
+   5:	81 fe 00 02 00 00    	cmp    $0x200,%esi
+   b:	74 70                	je     7d <main+0x7d>
+   d:	0f 1f 00             	nopl   (%rax)
+  10:	8d 4e fc             	lea    -0x4(%rsi),%ecx
+  13:	31 c0                	xor    %eax,%eax
+  15:	31 d2                	xor    %edx,%edx
+  17:	c1 e9 02             	shr    $0x2,%ecx
+  1a:	83 c1 01             	add    $0x1,%ecx
+  1d:	0f 1f 00             	nopl   (%rax)
+  20:	66 0f 6f 88 00 00 00 	movdqa 0x0(%rax),%xmm1
+  27:	00 
+  28:	83 c2 01             	add    $0x1,%edx
+  2b:	48 83 c0 10          	add    $0x10,%rax
+  2f:	66 0f 6f 80 00 00 00 	movdqa 0x0(%rax),%xmm0
+  36:	00 
+  37:	66 0f 6f d1          	movdqa %xmm1,%xmm2
+  3b:	66 0f 6f 88 00 00 00 	movdqa 0x0(%rax),%xmm1
+  42:	00 
+  43:	66 0f f4 80 00 00 00 	pmuludq 0x0(%rax),%xmm0
+  4a:	00 
+  4b:	66 0f 70 c0 08       	pshufd $0x8,%xmm0,%xmm0
+  50:	66 0f 73 d2 20       	psrlq  $0x20,%xmm2
+  55:	66 0f 73 d1 20       	psrlq  $0x20,%xmm1
+  5a:	66 0f f4 ca          	pmuludq %xmm2,%xmm1
+  5e:	66 0f 70 c9 08       	pshufd $0x8,%xmm1,%xmm1
+  63:	66 0f 62 c1          	punpckldq %xmm1,%xmm0
+  67:	0f 29 80 00 00 00 00 	movaps %xmm0,0x0(%rax)
+  6e:	39 d1                	cmp    %edx,%ecx
+  70:	77 ae                	ja     20 <main+0x20>
+  72:	83 c6 08             	add    $0x8,%esi
+  75:	81 fe 00 02 00 00    	cmp    $0x200,%esi
+  7b:	75 93                	jne    10 <main+0x10>
+  7d:	31 c0                	xor    %eax,%eax
+  7f:	c3                   	retq   

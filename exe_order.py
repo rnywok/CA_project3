@@ -62,11 +62,10 @@ def main(argv):
     try:
         with open(output_name, "w") as outFile:
             table="#sn,inst,issued,execution_completed,committed\n"
-            print(table)
+ 	    outFile.write(table)
             for i in result:
                 if 'execute' in i and 'commit' in i:
-                    print(str(i['sn'])+"\t"+i['inst']+"\t"+str(i['issue'])+"\t"+str(i['execute'])+"\t"+str(i['commit'])) 
-           
+                   outFile.write(str(i['sn'])+"\t"+i['inst']+"\t"+str(i['issue'])+"\t"+str(i['execute'])+"\t"+str(i['commit'])+"\n")  
 
 		 #your code here
             pass

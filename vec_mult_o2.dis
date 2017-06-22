@@ -1,0 +1,44 @@
+
+vec_mult_o2.o:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000000000 <vec_mult>:
+   0:	85 ff                	test   %edi,%edi
+   2:	7e 30                	jle    34 <vec_mult+0x34>
+   4:	8d 47 ff             	lea    -0x1(%rdi),%eax
+   7:	48 8d 0c 85 04 00 00 	lea    0x4(,%rax,4),%rcx
+   e:	00 
+   f:	31 c0                	xor    %eax,%eax
+  11:	0f 1f 80 00 00 00 00 	nopl   0x0(%rax)
+  18:	8b 90 00 00 00 00    	mov    0x0(%rax),%edx
+  1e:	48 83 c0 04          	add    $0x4,%rax
+  22:	0f af 90 00 00 00 00 	imul   0x0(%rax),%edx
+  29:	89 90 00 00 00 00    	mov    %edx,0x0(%rax)
+  2f:	48 39 c8             	cmp    %rcx,%rax
+  32:	75 e4                	jne    18 <vec_mult+0x18>
+  34:	f3 c3                	repz retq 
+
+Disassembly of section .text.startup:
+
+0000000000000000 <main>:
+   0:	31 f6                	xor    %esi,%esi
+   2:	b9 20 00 00 00       	mov    $0x20,%ecx
+   7:	83 c6 08             	add    $0x8,%esi
+   a:	81 fe 00 02 00 00    	cmp    $0x200,%esi
+  10:	74 31                	je     43 <main+0x43>
+  12:	31 c0                	xor    %eax,%eax
+  14:	0f 1f 40 00          	nopl   0x0(%rax)
+  18:	8b 90 00 00 00 00    	mov    0x0(%rax),%edx
+  1e:	48 83 c0 04          	add    $0x4,%rax
+  22:	0f af 90 00 00 00 00 	imul   0x0(%rax),%edx
+  29:	89 90 00 00 00 00    	mov    %edx,0x0(%rax)
+  2f:	48 39 c8             	cmp    %rcx,%rax
+  32:	75 e4                	jne    18 <main+0x18>
+  34:	83 c6 08             	add    $0x8,%esi
+  37:	48 83 c1 20          	add    $0x20,%rcx
+  3b:	81 fe 00 02 00 00    	cmp    $0x200,%esi
+  41:	75 cf                	jne    12 <main+0x12>
+  43:	31 c0                	xor    %eax,%eax
+  45:	c3                   	retq   
